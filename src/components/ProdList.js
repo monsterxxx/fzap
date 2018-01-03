@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Accordion } from 'semantic-ui-react'
 import { List } from 'semantic-ui-react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -34,7 +33,7 @@ class ProdList extends Component {
 
     return (
       // <List items={['Apples', 'Pears', 'Oranges']} />
-      <List devided items={
+      <List items={
         prodsToRender.map((prod) => prod.number)
       } />
     )

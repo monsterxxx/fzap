@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Dropdown } from 'semantic-ui-react'
+import { Form } from 'semantic-ui-react'
 import Select from 'react-select'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -27,10 +27,10 @@ const deptOptions = [
 //   { label: 'Крышка Г60', value: 'cjbp7a6p4232o0147t5yeyb6u' },
 // ]
 
-const options = [
-  { key: 'm', text: 'Male', value: 'male' },
-  { key: 'f', text: 'Female', value: 'female' },
-]
+// const options = [
+//   { key: 'm', text: 'Male', value: 'male' },
+//   { key: 'f', text: 'Female', value: 'female' },
+// ]
 
 const ALL_MODELS_QUERY = gql`
   query AllModelsQuery {
@@ -90,9 +90,9 @@ class CreateProd extends Component {
       console.log(`Selected: ${ e.value}`)
     }
   }
-  handleChangeInt = (e) => this.setState({ value: parseInt(e.target.value)})
+  // handleChangeInt = (e) => this.setState({ value: parseInt(e.target.value)})
   render() {
-    this.state.createdById = localStorage.getItem(GC_USER_ID)
+    this.setState({ createdById: localStorage.getItem(GC_USER_ID)})
     // console.log('this.props.allModelsQuery')
     // console.log(this.props.allModelsQuery.allModels)
     let modelOptions = [
@@ -163,16 +163,16 @@ class CreateProd extends Component {
         <Form.Group widths='equal'>
           <Form.Input label='Плавка' placeholder='Плавка'
             type="number" min="1" max="999"
-            onChange={(e) => this.setState({ melt: parseInt(e.target.value) })} value={this.state.melt}/>
+            onChange={(e) => this.setState({ melt: parseInt(e.target.value, 10) })} value={this.state.melt}/>
           <Form.Input label='Пл. смена (если промаркирована)' placeholder='Пл. смена'
             type="number" min="1" max="3"
-            onChange={(e) => this.setState({ meltShift: parseInt(e.target.value) }) } value={this.state.meltShift}/>
+            onChange={(e) => this.setState({ meltShift: parseInt(e.target.value, 10) }) } value={this.state.meltShift}/>
           <Form.Input label='Номер' placeholder='Номер'
             type="number" min="1" max="999"
-            onChange={(e) => this.setState({ number: parseInt(e.target.value) })} value={this.state.number}/>
+            onChange={(e) => this.setState({ number: parseInt(e.target.value, 10) })} value={this.state.number}/>
           <Form.Input label='Год' placeholder='Год'
             type="number" min="16" max="18"
-            onChange={(e) => this.setState({ year: parseInt(e.target.value) })} value={this.state.year}/>
+            onChange={(e) => this.setState({ year: parseInt(e.target.value, 10) })} value={this.state.year}/>
         </Form.Group>
         {/* <Form.TextArea label='Комментарий' placeholder='Вставьте комментарий при необходимости...' /> */}
         <Form.Button>Добавить</Form.Button>

@@ -3,7 +3,6 @@ import { Switch, Route } from 'react-router-dom'
 
 import Header from './Header'
 import Login from './Login'
-import LinkList from './LinkList'
 import DeptList from './DeptList'
 import CreateLink from './CreateLink'
 import CreateProd from './CreateProd'
