@@ -45,11 +45,17 @@ input {
   max-width: 250px;
 }
 
-.disabled-vsible {
+/* SEMANTIC UI FIXES */
+
+/* .disabled-vsible {
   opacity: 1;
   color: rgba(0,0,0,.87);
-}
+} */
 
 .Select-input {
   border: none !important
+}
+
+.ui.accordion {
+  margin-top: 0 !important
 }

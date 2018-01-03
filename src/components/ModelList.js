@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Accordion } from 'semantic-ui-react'
+import { Accordion, Button } from 'semantic-ui-react'
 import ProdList from './ProdList'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -44,7 +44,7 @@ class ModelList extends Component {
             }
           })))
         }
-      />
+      ></Accordion>
     )
   }
 }

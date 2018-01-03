@@ -34,7 +34,7 @@ class ProdList extends Component {
 
     return (
       // <List items={['Apples', 'Pears', 'Oranges']} />
-      <List items={
+      <List devided items={
         prodsToRender.map((prod) => prod.number)
       } />
     )

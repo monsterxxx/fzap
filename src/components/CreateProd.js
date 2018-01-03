@@ -124,7 +124,6 @@ class CreateProd extends Component {
         options={modelOptions}
       /> */}
       <Form onSubmit={() => this._confirm()}>
-        {this.state.modelId}
         {/* <Form.Select label='Участок' options={deptOptions} value={this.state.deptId}/> */}
         {/* <Form.Select label='Вид продукции' options={modelOptions}
           onChange={(e) => this.setState({ modelId: e.target.value })} value={this.state.modelId}/> */}
