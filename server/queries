@@ -1,0 +1,79 @@
+query ($deptId: ID!) {
+  allModels {
+    _prodsMeta (filter: {
+      dept: {
+        id: $deptId
+      }
+    }) {
+     count
+    }
+    id
+    name
+  }
+}
+
+query ($deptId: ID!) {
+  allModels(filter: {
+    prods_some: {
+      dept: {
+        id: $deptId
+      }
+    }
+  }) {
+    id
+    name
+  }
+}
+
+query {
+  allDepts {
+    _prodsMeta {
+     count
+    }
+    id
+    name
+  }
+}
+
+https://github.com/graphcool/framework/issues/40
+query {
+  slowlife: allGenres(filter: {key: SLOW_LIFE}) {
+    _vinylsMeta {
+			count
+    }
+    key
+  }
+
+  timelink: allGenres(filter: {key: TIMELINK}) {
+    _vinylsMeta {
+			count
+    }
+    key
+  }
+}
+
+https://www.graph.cool/forum/t/mutation-inside-a-graphcool-function/239
+var mutation = `
+	mutation {
+		createTagging (
+			tags: "${tagsToCreate}",
+			userId: "${fakeUserId}
+		) {
+			id
+		}
+	}
+`
+return fetch(API, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ mutation })
+}).then((response) => {
+	return response.json()
+}).then((data) => {
+	console.log(data)
+	return event
+}).catch((err) => {
+	console.log(err)
+})

@@ -4,35 +4,6 @@ import gql from 'graphql-tag'
 
 import { GC_USER_ID, GC_AUTH_TOKEN } from '../constants'
 
-const CREATE_USER_MUTATION = gql`
-  mutation CreateUserMutation($email: String!, $password: String!) {
-    createUser(
-      authProvider: {
-        email: {
-          email: $email,
-          password: $password
-        }
-      }) {
-        id
-      }
-  }
-`
-
-const SIGNIN_USER_MUTATION = gql`
-  mutation SigninUserMutation($email: String!, $password: String!) {
-    signinUser(
-      email: {
-        email: $email,
-        password: $password
-      }){
-      token
-      user {
-        id
-      }
-    }
-  }
-`
-
 class Login extends Component {
 
   state = {
@@ -89,32 +60,25 @@ class Login extends Component {
   }
 
   _confirm = async () => {
-   const { email, password } = this.state
+   const { name, email, password } = this.state
    if (this.state.login) {
-     const result = await this.props.signinUserMutation({
+     const result = await this.props.authenticateUserMutation({
        variables: {
          email,
          password
        }
      })
-     const id = result.data.signinUser.user.id
-     const { token } = result.data.signinUser
+     const { id, token } = result.data.authenticateUser
      this._saveUserData(id, token)
    } else {
-     let result = await this.props.createUserMutation({
+     const result = await this.props.signupUserMutation({
        variables: {
+         name,
          email,
          password
        }
      })
-     const { id } = result.data.createUser
-     result = await this.props.signinUserMutation({
-       variables: {
-         email,
-         password
-       }
-     })
-     const { token } = result.data.signinUser
+     const { id, token } = result.data.signupUser
      this._saveUserData(id, token)
    }
    this.props.history.push(`/`)
@@ -127,7 +91,32 @@ class Login extends Component {
 
 }
 
+const SIGNUP_USER_MUTATION = gql`
+  mutation SignupUserMutation($email: String!, $password: String!, $name: String!) {
+    signupUser(
+      email: $email,
+      password: $password,
+      name: $name
+    ) {
+      id
+      token
+    }
+  }
+`
+
+const AUTHENTICATE_USER_MUTATION = gql`
+  mutation AuthenticateUserMutation($email: String!, $password: String!) {
+    authenticateUser(
+      email: $email,
+      password: $password
+    ) {
+      id
+      token
+    }
+  }
+`
+
 export default compose(
-  graphql(CREATE_USER_MUTATION, { name: 'createUserMutation' }),
-  graphql(SIGNIN_USER_MUTATION, { name: 'signinUserMutation' })
+  graphql(SIGNUP_USER_MUTATION, { name: 'signupUserMutation' }),
+  graphql(AUTHENTICATE_USER_MUTATION, { name: 'authenticateUserMutation' })
 )(Login)

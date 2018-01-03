@@ -11,7 +11,8 @@ class Link extends Component {
   }
 
   _voteForLink = async () => {
-    // ... you'll implement this in chapter 6  
+    // ... you'll implement this in chapter 6
+    // ►◄▲▼
   }
 
 }

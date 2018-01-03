@@ -18,11 +18,11 @@ class LinkList extends Component {
 
   render() {
     if (this.props.allLinksQuery && this.props.allLinksQuery.loading) {
-     return <div>Loading</div>
+     return <div>Загрузка</div>
     }
 
     if (this.props.allLinksQuery && this.props.allLinksQuery.error) {
-      return <div>Error</div>
+      return <div>Ошибка. Сообщите Администратору</div>
     }
 
     const linksToRender = this.props.allLinksQuery.allLinks

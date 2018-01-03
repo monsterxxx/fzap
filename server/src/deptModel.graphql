@@ -1,0 +1,18 @@
+subscription {
+  Prod(filter: {
+    mutation_in: [CREATED, UPDATED, DELETED]
+  }) {
+    mutation
+    node {
+      model {
+        id
+      }
+    }
+    previousValues {
+      id
+      model {
+        id
+      }
+    }
+  }
+}
