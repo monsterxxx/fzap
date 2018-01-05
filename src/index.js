@@ -1,19 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import 'semantic-ui-css/semantic.min.css'
-import 'react-select/dist/react-select.css'
 import './styles/index.css'
 import App from './components/App'
-import registerServiceWorker from './registerServiceWorker'
+// import registerServiceWorker from './registerServiceWorker'
 import { HashRouter, BrowserRouter } from 'react-router-dom'
 
 import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
+// import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-transport-ws'
+import { ApolloLink } from 'apollo-client-preset'
 
 import { GC_AUTH_TOKEN } from './constants'
-import { ApolloLink } from 'apollo-client-preset'
 
 const httpLink = new HttpLink({ uri: 'https://api.graph.cool/simple/v1/cjbuug4g90oz80127p4yshxxf' })
 
@@ -36,7 +36,7 @@ const client = new ApolloClient({
 })
 
 ReactDOM.render(
-  <HashRouter>
+  <HashRouter forceRefresh>
     <ApolloProvider client={client}>
       <App />
     </ApolloProvider>

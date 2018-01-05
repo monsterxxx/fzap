@@ -28,7 +28,7 @@ class DeptList extends Component {
     }
 
     if (this.props.allDeptsQuery && this.props.allDeptsQuery.error) {
-      return <div>Ошибка загрузки DeptList. Сообщите Администратору</div>
+      return <div>Ошибка загрузки DeptList. Попробуйте перезагрузить страницу. Если ошибка сохраняется, сообщите Администратору</div>
     }
 
     const deptsToRender = this.props.allDeptsQuery.allDepts

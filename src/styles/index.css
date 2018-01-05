@@ -3,3 +3,10 @@
 .ui.accordion {
   margin-top: 0 !important
 }
+
+.addclass {
+  max-width: 700px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  border-radius: 0.285714rem;
+}

@@ -56,7 +56,7 @@ class Login extends Component {
             </a>
           </Header.Subheader>
         </Header>
-        {!this.state.login &&
+        {/* {!this.state.login &&
           <Form.Input
             label='Фамилия Имя'
             placeholder='Фамилия Имя'
@@ -65,7 +65,7 @@ class Login extends Component {
             value={this.state.name}
             onChange={(e, props) => this.setState({ name: props.value })}
           />
-        }
+        } */}
         <Form.Input
           label='E-mail'
           placeholder='E-mail'

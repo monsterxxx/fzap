@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu, Icon } from 'semantic-ui-react'
+import { Menu, Icon, Container } from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
@@ -14,7 +14,9 @@ class Header extends Component {
   render() {
     const userId = localStorage.getItem(GC_USER_ID)
     return (
-      <Menu inverted>
+      // <Menu fixed='top' inverted className='addclass'>
+      <Menu inverted >
+        {/* <Container text> */}
         <Menu.Item header>KOMZ</Menu.Item>
         {userId &&
           <Menu.Menu>
@@ -37,6 +39,7 @@ class Header extends Component {
             <Menu.Item name='Вход' as={ NavLink } exact to='/login' color='grey' />
           }
         </Menu.Menu>
+        {/* </Container> */}
       </Menu>
     )
   }
