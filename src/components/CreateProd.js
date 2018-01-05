@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import { Form } from 'semantic-ui-react'
-import Select from 'react-select'
+import { Form, Header } from 'semantic-ui-react'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 import { GC_USER_ID } from '../constants'
 
-// const deptOptions = [
-//   { key: 'k', text: 'KOMZ', value: 'cjbnj9fft1flc0162bk4freey' },
-// ]
-
 const deptOptions = [
-  { label: 'Оп', value: 'cjbuuv9ka4s3l0162qzn4zy5x' },
+  { key: 'k1', text: 'Оп', value: 'cjbuuv9ka4s3l0162qzn4zy5x' },
+  { key: 'k2', text: 'Опа', value: 'cjbuuvddo4opm0147d178zmuy' }
 ]
+
+// const deptOptions = [
+//   { label: 'Оп', value: 'cjbuuv9ka4s3l0162qzn4zy5x' },
+// ]
 
 // const modelOptions = [
 //   { key: 'a', text: 'Втулка ДР30/50', value: 'cjbnpf1yk1mzf0147gerp4m7s' },
@@ -58,19 +58,20 @@ const CREATE_PROD_MUTATION = gql`
 `
 
 class CreateProd extends Component {
-  // constructor(props){
-  //   super(props)
-  //   this.handleChange = this.handleChange.bind(this)
-  // }
-  state = {
-    createdById: '',
-    deptId: 'cjbuuv9ka4s3l0162qzn4zy5x',
-    modelId: 'cjbuv06lu4oq40147jl77mgck',
-    modelId1: 'cjbuv06lu4oq40147jl77mgck',
-    melt: 1,
-    meltShift: 1,
-    number: 1,
-    year: 17
+  constructor(props){
+    super(props)
+    this.state = {
+      deptId: 'cjbuuv9ka4s3l0162qzn4zy5x',
+      modelId: 'cjbuv06lu4oq40147jl77mgck',
+      modelId1: 'cjbuv06lu4oq40147jl77mgck',
+      melt: 1,
+      meltShift: 1,
+      number: 1,
+      year: 17
+    }
+
+    this.handleChange3 = this.handleChange3.bind(this)
+    this.handleChange4 = this.handleChange4.bind(this)
   }
   // handleChange = (e, { value }) => this.setState({ value })
   // handleChange(e) {
@@ -90,18 +91,32 @@ class CreateProd extends Component {
       console.log(`Selected: ${ e.value}`)
     }
   }
+  handleChange3(event, e) {
+    if (e) {
+      // console.log(value);
+      this.setState({deptId: e.value})
+      console.log(`Selected: ${ e.value}`)
+    }
+  }
+  handleChange4(event, e) {
+    if (e) {
+      this.setState({modelId: e.value})
+      console.log(`Selected: ${ e.value}`)
+    }
+  }
   // handleChangeInt = (e) => this.setState({ value: parseInt(e.target.value)})
   render() {
-    this.setState({ createdById: localStorage.getItem(GC_USER_ID)})
+    // const createdById = localStorage.getItem(GC_USER_ID)
+    // this.setState({ createdById: createdById })
     // console.log('this.props.allModelsQuery')
     // console.log(this.props.allModelsQuery.allModels)
     let modelOptions = [
-      { label: 'Вид продукции', value: 'cjbuv06lu4oq40147jl77mgck' }
+      { text: 'Вид продукции', value: 'cjbuv06lu4oq40147jl77mgck' }
     ]
     if (this.props.allModelsQuery.allModels) {
       modelOptions = this.props.allModelsQuery.allModels.map(model => {
         return {
-          label: model.name,
+          text: model.name,
           value:  model.id
         }
       })
@@ -124,7 +139,10 @@ class CreateProd extends Component {
         options={modelOptions}
       /> */}
       <Form onSubmit={() => this._confirm()}>
-        {/* <Form.Select label='Участок' options={deptOptions} value={this.state.deptId}/> */}
+        <Header as='h2'> Добавление продукции </Header>
+        <Form.Select label='Участок' options={deptOptions} onChange={this.handleChange3} value={this.state.deptId}/>
+        <Form.Select label='Вид продукции' options={modelOptions} onChange={this.handleChange4} value={this.state.modelId}/>
+        {/* <Form.Select label='Участок' options={deptOptions} onChange={(e) => this.setState({ deptId: e.target.value }).bind(this)} value={this.state.deptId}/> */}
         {/* <Form.Select label='Вид продукции' options={modelOptions}
           onChange={(e) => this.setState({ modelId: e.target.value })} value={this.state.modelId}/> */}
         {/* <Form.Field label='Вид продукции' control={Select} placeholder='Вид продукции'
@@ -133,7 +151,7 @@ class CreateProd extends Component {
           onChange={this.handleChange.bind(this)}
           options={modelOptions}
         /> */}
-        <Form.Field>
+        {/* <Form.Field>
           <label>Участок</label>
           <Select
             autosize={false}
@@ -142,8 +160,8 @@ class CreateProd extends Component {
             onChange={this.handleChange.bind(this)}
             options={deptOptions}
           />
-        </Form.Field>
-        <Form.Field>
+        </Form.Field> */}
+        {/* <Form.Field>
           <label>Вид продукции</label>
           <Select
             autosize={false}
@@ -152,7 +170,7 @@ class CreateProd extends Component {
             onChange={this.handleChange1.bind(this)}
             options={modelOptions}
           />
-        </Form.Field>
+        </Form.Field> */}
 
         {/* <Form.Field label='An HTML <select>' control='select'>
           <option value='cjbnpf1yk1mzf0147gerp4m7s'>Втулка ДР30/50</option>
@@ -182,22 +200,23 @@ class CreateProd extends Component {
   }
 
   _confirm = () => {
-   const { createdById, deptId, modelId, melt, meltShift, number, year } = this.state
-   console.log(createdById, deptId, modelId, melt, meltShift, number, year);
+    const createdById = localStorage.getItem(GC_USER_ID)
+    const { deptId, modelId, melt, meltShift, number, year } = this.state
+    console.log(createdById, deptId, modelId, melt, meltShift, number, year)
 
- this.props.createProdMutation ({
-    variables: {
-      createdById,
-      deptId,
-      modelId,
-      melt,
-      meltShift,
-      number,
-      year
-    }
-  })
-  this.props.history.push(`/`)
- }
+    this.props.createProdMutation ({
+      variables: {
+        createdById,
+        deptId,
+        modelId,
+        melt,
+        meltShift,
+        number,
+        year
+      }
+    })
+    this.props.history.push(`/`)
+  }
 }
 
 export default compose(

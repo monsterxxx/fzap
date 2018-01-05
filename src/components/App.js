@@ -1,26 +1,25 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
+import { Container } from 'semantic-ui-react'
 
 import Header from './Header'
 import Login from './Login'
 import DeptList from './DeptList'
-import CreateLink from './CreateLink'
 import CreateProd from './CreateProd'
 
 class App extends Component {
   render() {
     return (
-      <div className='center w85'>
+      <Container text>
         <Header />
         <div className='ph3 pv1 background-gray'>
           <Switch>
             <Route exact path='/login' component={Login}/>
             <Route exact path='/' component={DeptList}/>
-            <Route exact path='/create' component={CreateLink}/>
             <Route exact path='/create_prod' component={CreateProd}/>
           </Switch>
         </div>
-      </div>
+      </Container>
     );
   }
 }

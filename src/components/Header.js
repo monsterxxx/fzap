@@ -1,37 +1,43 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Menu, Icon } from 'semantic-ui-react'
+import { NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
 import { GC_USER_ID, GC_AUTH_TOKEN } from '../constants'
 
 class Header extends Component {
 
+  state = {}
+
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
   render() {
     const userId = localStorage.getItem(GC_USER_ID)
     return (
-      <div className='flex pa1 justify-between nowrap green'>
-        <div className='flex flex-fixed white'>
-          <div className='fw7 mr1'>KOMZ.net</div>
-          <Link to='/' className='ml3 no-underline white'>Запасы</Link>
-          <Link to='/' className='ml3 no-underline white'>Перемещения</Link>
-          {userId &&
-          <div className='flex'>
-            <Link to='/create_prod' className='ml3 no-underline white'>Добавить втулку</Link>
-          </div>
-          }
-        </div>
-        <div className='flex flex-fixed'>
+      <Menu inverted>
+        <Menu.Item header>KOMZ</Menu.Item>
+        {userId &&
+          <Menu.Menu>
+            <Menu.Item icon name='home' as={ NavLink } exact to='/' color='grey'>
+              <Icon name='home' />
+            </Menu.Item>
+            <Menu.Item icon name='createProd' as={ NavLink } exact to='/create_prod' color='grey'>
+              <Icon name='plus' />
+            </Menu.Item>
+          </Menu.Menu>
+        }
+        <Menu.Menu position='right'>
           {userId ?
-            <div className='ml3 mr3 pointer white' onClick={() => {
+            <Menu.Item name='Выход' onClick={() => {
               localStorage.removeItem(GC_USER_ID)
               localStorage.removeItem(GC_AUTH_TOKEN)
-              this.props.history.push(`/new/1`)
-            }}>{userId} Выход</div>
+              this.props.history.push(`/`)
+            }} />
             :
-            <Link to='/login' className='ml3 mr3 no-underline white'>Вход</Link>
+            <Menu.Item name='Вход' as={ NavLink } exact to='/login' color='grey' />
           }
-        </div>
-      </div>
+        </Menu.Menu>
+      </Menu>
     )
   }
 

@@ -33,18 +33,19 @@ class ModelList extends Component {
     const modelsToRender = this.props.deptModelQuery.allModels;
 
     return (
-      <Accordion styled exclusive={false}
-        panels={
-          // modelsToRender.map((model, index) => ({title: model.name + ' ('+model._productsMeta.count+')', content:  {content: this.props.deptId, key: 'content-' + index }}))
-          (modelsToRender.map((model, index) => ({
-            title: model.name + ' ('+model._productsMeta.count+')',
-            content: {
-              content: (<ProdList deptId={this.props.deptId} modelId={model.id} />),
-              key: 'content-' + index
-            }
-          })))
-        }
-      ></Accordion>
+        <Accordion exclusive={false} styled
+          panels={
+            // modelsToRender.map((model, index) => ({title: model.name + ' ('+model._productsMeta.count+')', content:  {content: this.props.deptId, key: 'content-' + index }}))
+            (modelsToRender.map((model, index) => ({
+              title: model.name + ' ('+model._productsMeta.count+')',
+              content: {
+                content: (<ProdList deptId={this.props.deptId} modelId={model.id} />),
+                key: 'content-' + index
+              }
+            })))
+          }
+          ></Accordion>
+
     )
   }
 }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Header, Form, Button } from 'semantic-ui-react'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -46,44 +45,46 @@ class Login extends Component {
   render() {
 
     return (
-      <Form>
-        <Header as='h2'>{this.state.login ? 'Вход' : 'Регистрация'}
-          <Header.Subheader>
-            или <a href='javascript:void(0)'
+      <div>
+        <h4 className='mv3'>{this.state.login ? 'Вход' : 'Регистрация'} <span
+            className='normal'>или <a
+              className='pointer underline normal'
               onClick={() => this.setState({ login: !this.state.login })}
             >
               {this.state.login ? 'регистрация новых пользователей' : 'вход в существующий аккаунт'}
             </a>
-          </Header.Subheader>
-        </Header>
-        {!this.state.login &&
-          <Form.Input
-            label='Фамилия Имя'
-            placeholder='Фамилия Имя'
-            type='text'
-            required
+          </span>
+        </h4>
+        <div className='flex flex-column'>
+          {!this.state.login &&
+          <input
             value={this.state.name}
-            onChange={(e, props) => this.setState({ name: props.value })}
+            onChange={(e) => this.setState({ name: e.target.value })}
+            type='text'
+            placeholder='Фамилия Имя'
+          />}
+          <input
+            value={this.state.email}
+            onChange={(e) => this.setState({ email: e.target.value })}
+            type='text'
+            placeholder='E-mail'
           />
-        }
-        <Form.Input
-          label='E-mail'
-          placeholder='E-mail'
-          type='email'
-          required
-          value={this.state.email}
-          onChange={(e, props) => this.setState({ email: props.value })}
-        />
-        <Form.Input
-          label='Пароль'
-          placeholder='Пароль'
-          type='password'
-          required
-          value={this.state.password}
-          onChange={(e, props) => this.setState({ password: props.value })}
-        />
-        <Button onClick={() => this._confirm()}>{this.state.login ? 'Войти' : 'Зарегистрироваться' }</Button>
-      </Form>
+          <input
+            value={this.state.password}
+            onChange={(e) => this.setState({ password: e.target.value })}
+            type='password'
+            placeholder='Пароль'
+          />
+        </div>
+        <div className='flex mt3'>
+          <div
+            className='pointer mr2 button'
+            onClick={() => this._confirm()}
+          >
+            {this.state.login ? 'Войти' : 'Зарегистрироваться' }
+          </div>
+        </div>
+      </div>
     )
   }
 
