@@ -4,14 +4,15 @@ import 'semantic-ui-css/semantic.min.css'
 import './styles/index.css'
 import App from './components/App'
 // import registerServiceWorker from './registerServiceWorker'
-import { HashRouter, BrowserRouter } from 'react-router-dom'
+// import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 
 import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
-// import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-transport-ws'
 import { ApolloLink } from 'apollo-client-preset'
+// import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-transport-ws'
 
 import { GC_AUTH_TOKEN } from './constants'
 

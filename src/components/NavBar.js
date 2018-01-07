@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
-import { Menu, Icon } from 'semantic-ui-react'
+import { Menu, Icon, Message } from 'semantic-ui-react'
 
 import { GC_USER_ID, GC_AUTH_TOKEN } from '../constants'
 
@@ -43,7 +43,9 @@ class NavBar extends Component {
           </Menu.Menu>
           {/* </Container> */}
         </Menu>
-        {this.props.user}
+        {!this.props.user &&
+          <Message warning>Войдите в систему, чтобы продолжить</Message>
+        }
       </div>
 
 

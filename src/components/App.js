@@ -20,7 +20,7 @@ class App extends Component {
 
     return (
       <Container text>
-        <NavBar />
+        {/* <NavBar /> */}
         <Switch>
           <Route exact path='/' render={(props) => ( <Store user={userId} /> )} />
           <Route exact path='/create_prod' component={CreateProd}/>

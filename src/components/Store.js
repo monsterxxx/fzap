@@ -8,10 +8,8 @@ import NavBar from './NavBar'
 import DeptList from './DeptList'
 import DataLoadErrorMessage from './messages/DataLoadErrorMessage'
 
-import { GC_USER_ID } from '../constants'
-
-const AllDeptsQuery = gql`
-  query AllDeptsQuery {
+const allDeptsQuery = gql`
+  query allDeptsQuery {
     allDepts {
       id
       name
@@ -21,32 +19,31 @@ const AllDeptsQuery = gql`
 `
 
 class Store extends Component {
+  componentWillReceiveProps (nextProps) {
+    console.log('props > '+ this.props.user)
+    console.log('nextProps > '+ nextProps.user)
+  }
   render() {
 
-    const userId = localStorage.getItem(GC_USER_ID)
+    const userId = this.props.user
 
-    if (!userId) {
-      return <Header>Войдите в систему, чтобы продолжить</Header>
-    }
+    const query = this.props.allDeptsQuery
 
-    const query = this.props.AllDeptsQuery
-
-    if (query && query.loading) {
-     return <div>Загрузка</div>
-    }
-
-    if (query && query.error) {
-      return <DataLoadErrorMessage dataTitle='DeptList' />
-    }
+    // console.log(userId)
 
     return (
       <div>
         <NavBar user={this.props.user} />
-        <DeptList depts={query.allDepts} />
+        { !userId ? (null) :
+          query &&
+          query.loading ? <div>Загрузка</div> :
+          query.error ? <DataLoadErrorMessage dataTitle='DeptList' /> :
+          <DeptList depts={query.allDepts} />
+        }
       </div>
     )
   }
 
 }
 
-export default graphql(AllDeptsQuery, { 'name': 'AllDeptsQuery' }) (Store)
+export default graphql( allDeptsQuery, { 'name': 'allDeptsQuery' } ) (Store)
