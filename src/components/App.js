@@ -4,7 +4,7 @@ import { Container } from 'semantic-ui-react'
 
 import Header from './Header'
 import Login from './Login'
-import DeptList from './DeptList'
+import Store from './Store'
 import CreateProd from './CreateProd'
 
 class App extends Component {
@@ -12,13 +12,12 @@ class App extends Component {
     return (
       <Container text>
         <Header />
-        <div className='ph3 pv1 background-gray'>
-          <Switch>
-            <Route exact path='/login' component={Login}/>
-            <Route exact path='/' component={DeptList}/>
-            <Route exact path='/create_prod' component={CreateProd}/>
-          </Switch>
-        </div>
+        <Switch>
+
+          <Route exact path='/' component={Store}/>
+          <Route exact path='/create_prod' component={CreateProd}/>
+          <Route exact path='/login' component={Login}/>
+        </Switch>
       </Container>
     );
   }

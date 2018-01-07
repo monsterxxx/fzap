@@ -34,12 +34,12 @@ class ProdList extends Component {
 
     const prodsToRender = this.props.deptModelProdQuery.allProds;
 
+    // this.handleItemClick = (e, data) => {
+    //   console.log(data)
+    // }
+    // onItemClick={this.handleItemClick}
+
     return (
-      // <List items={
-      //   prodsToRender.map((prod) => prod.fullnumber)
-      // } />
-      // <List>
-      // <List divided selection>
       <List divided selection size='medium'>
         {prodsToRender.map((prod) => <ProdItem title={prod.fullnumber} key={prod.id}/>)}
       </List>

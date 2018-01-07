@@ -52,6 +52,8 @@ query {
   }
 }
 
+
+-----------------------------------------------------------------------
 https://www.graph.cool/forum/t/mutation-inside-a-graphcool-function/239
 var mutation = `
 	mutation {
@@ -77,3 +79,61 @@ return fetch(API, {
 }).catch((err) => {
 	console.log(err)
 })
+
+-----------------------------------------------------------------------
+https://www.graph.cool/docs/reference/graphql-api/overview-abogasd0go/
+const { request } = require('graphql-request')
+
+module.exports = function (event) {
+  console.log('Received event')
+  console.log(event.data)
+
+  const mutation = `{
+    createDeptModel(
+      deptId: "cjbuuv9ka4s3l0162qzn4zy5x",
+      modelId: "cjc0d2ck96c4s0147y9zppoty",
+      prodCount: 1
+    ) {
+      id
+    }
+  }`
+
+  console.log('Mutation data')
+  request('https://api.graph.cool/simple/v1/cjbuug4g90oz80127p4yshxxf', mutation).then(data => console.log(data))
+
+}
+
+!!!!!WORKING IN RESOLVERS _-----------------------------------------------------
+var fetch = require("isomorphic-fetch")
+
+module.exports = function (event) {
+
+  var query = `
+    query {
+      allDeptModels {
+        id
+		dept {
+			id
+		}
+		model {
+			id
+		}
+      }
+    }
+  `
+  return fetch('https://api.graph.cool/simple/v1/cjbuug4g90oz80127p4yshxxf', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTUyNTAzNDEsImNsaWVudElkIjoiY2phNGxqaGo4MHllcTAxNTRzbGlydHRhZCIsInByb2plY3RJZCI6ImNqYnV1ZzRnOTBvejgwMTI3cDR5c2h4eGYiLCJwZXJtYW5lbnRBdXRoVG9rZW5JZCI6ImNqYzNneGkxdjFvZXgwMTg3dW9vOGEzemsifQ.egtJ61hAd5C156_wQWvb5Ij5N_dEP3-ec131D24_UNg'
+        },
+        body: JSON.stringify({ query: query })
+  }).then((response) => {
+      return response.json()
+  }).then((data) => {
+      console.log(data)
+      return event
+  }).catch((err) => {
+      console.log(err)
+  })
+}
