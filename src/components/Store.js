@@ -11,7 +11,7 @@ import { GC_USER_ID } from '../constants'
 const AllDeptsQuery = gql`
   query AllDeptsQuery {
     allDepts {
-      id
+      idn
       name
       type
     }
