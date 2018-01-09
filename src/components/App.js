@@ -14,6 +14,7 @@ class App extends Component {
 
     const userId = localStorage.getItem(GC_USER_ID)
 
+    // console.log(this.props.client) //ApolloClient passed with props
     // const user = {
     //   id: userId
     // }

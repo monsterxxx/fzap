@@ -19,17 +19,18 @@ const allDeptsQuery = gql`
 `
 
 class Store extends Component {
-  componentWillReceiveProps (nextProps) {
-    console.log('props > '+ this.props.user)
-    console.log('nextProps > '+ nextProps.user)
-  }
+  // componentDidMount () {
+  //   console.log('componentDidMount > ')
+  // }
+  // componentWillReceiveProps (nextProps) {
+  //   console.log('props > '+ this.props.user)
+  //   console.log('nextProps > '+ nextProps.user)
+  // }
   render() {
 
     const userId = this.props.user
 
     const query = this.props.allDeptsQuery
-
-    // console.log(userId)
 
     return (
       <div>

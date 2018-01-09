@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Header, Form, Button } from 'semantic-ui-react'
-import { graphql, compose } from 'react-apollo'
+import { graphql, compose, withApollo } from 'react-apollo'
 import gql from 'graphql-tag'
 
 import { GC_USER_ID, GC_AUTH_TOKEN } from '../constants'
@@ -126,7 +126,7 @@ class Login extends Component {
 
 }
 
-export default compose(
+export default withApollo(compose(
   graphql(CREATE_USER_MUTATION, { name: 'createUserMutation' }),
   graphql(SIGNIN_USER_MUTATION, { name: 'signinUserMutation' })
-)(Login)
+)(Login))
