@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
-import { Menu, Icon, Message } from 'semantic-ui-react'
+import { Menu, Icon, Message, Modal } from 'semantic-ui-react'
+
+import CreateProdModal from './CreateProdModal'
 
 import { GC_USER_ID, GC_AUTH_TOKEN } from '../constants'
 
@@ -17,7 +19,7 @@ class NavBar extends Component {
     return (
       // <Menu fixed='top' inverted className='addclass'>
       <div>
-        <Menu inverted >
+        <Menu size='large' inverted >
           {/* <Container text> */}
           <Menu.Item header>KOMZ</Menu.Item>
           {this.props.user &&
@@ -27,6 +29,10 @@ class NavBar extends Component {
               </Menu.Item>
               <Menu.Item icon name='createProd' as={ NavLink } exact to='/create_prod' color='grey'>
                 <Icon name='plus' />
+              </Menu.Item>
+              <Menu.Item icon link name='create' color='grey'>
+                <CreateProdModal />
+
               </Menu.Item>
             </Menu.Menu>
           }
