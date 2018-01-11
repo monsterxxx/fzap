@@ -125,7 +125,7 @@ module.exports = function (event) {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTUyNTAzNDEsImNsaWVudElkIjoiY2phNGxqaGo4MHllcTAxNTRzbGlydHRhZCIsInByb2plY3RJZCI6ImNqYnV1ZzRnOTBvejgwMTI3cDR5c2h4eGYiLCJwZXJtYW5lbnRBdXRoVG9rZW5JZCI6ImNqYzNneGkxdjFvZXgwMTg3dW9vOGEzemsifQ.egtJ61hAd5C156_wQWvb5Ij5N_dEP3-ec131D24_UNg'
+          'Authorization': ''
         },
         body: JSON.stringify({ query: query })
   }).then((response) => {
