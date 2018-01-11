@@ -1,13 +1,8 @@
 import React, { Component } from 'react'
-import { Form, Header, Modal, Icon, Button } from 'semantic-ui-react'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
+import { Modal, Form, Icon, Button } from 'semantic-ui-react'
 import { GC_USER_ID } from '../constants'
-
-const deptOptions = [
-  { key: 'k1', text: 'Оп', value: 'cjbuuv9ka4s3l0162qzn4zy5x' },
-  { key: 'k2', text: 'Опа', value: 'cjbuuvddo4opm0147d178zmuy' }
-]
 
 const AllDeptsAndModelsQuery = gql`
   query AllDeptsAndModelsQuery {
@@ -39,21 +34,25 @@ const CREATE_PROD_MUTATION = gql`
 `
 
 class CreateProdModal extends Component {
+
   constructor(props){
     super(props)
-    this.state = {
-      deptId: 'cjbuuv9ka4s3l0162qzn4zy5x',
-      modelId: 'cjbuv06lu4oq40147jl77mgck',
-      modelId1: 'cjbuv06lu4oq40147jl77mgck',
-      melt: 1,
-      meltShift: 1,
-      number: 1,
-      year: 17
-    }
-
     this.handleChange3 = this.handleChange3.bind(this)
     this.handleChange4 = this.handleChange4.bind(this)
   }
+
+  state = {
+    open: false,
+    deptId: 'cjbuuv9ka4s3l0162qzn4zy5x',
+    modelId: 'cjbuv06lu4oq40147jl77mgck',
+    modelId1: 'cjbuv06lu4oq40147jl77mgck',
+    melt: 1,
+    meltShift: undefined,
+    number: 1,
+    year: 17
+  }
+  open = () => this.setState({ open: true })
+  close = () => this.setState({ open: false })
   handleChange(e) {
     if (e) {
       this.setState({deptId: e.value})
@@ -79,21 +78,34 @@ class CreateProdModal extends Component {
       console.log(`Selected: ${ e.value}`)
     }
   }
+
   render() {
-    let modelOptions = [
-      { text: 'Вид продукции', value: 'cjbuv06lu4oq40147jl77mgck' }
-    ]
-    if (this.props.AllDeptsAndModelsQuery.allModels) {
-      modelOptions = this.props.AllDeptsAndModelsQuery.allModels.map(model => {
+    const { open } = this.state
+    const query = this.props.AllDeptsAndModelsQuery
+    const deptOptions = !query ? [ { text: 'Участок ', value: 'cjbuuv9ka4s3l0162qzn4zy5x' } ] :
+      query.loading ? [ { text: 'Загрузка списка', value: 'cjbuuv9ka4s3l0162qzn4zy5x' } ] :
+      query.error ? [ { text: 'Ошибка загрузки списка', value: 'cjbuuv9ka4s3l0162qzn4zy5x' } ] :
+      query.allDepts.map(dept => {
+        return {
+          text: dept.name,
+          value:  dept.id
+        }
+      })
+    const modelOptions = !query ? [ { text: 'Вид продукции', value: 'cjbuv06lu4oq40147jl77mgck' } ] :
+      query.loading ? [ { text: 'Загрузка списка', value: 'cjbuv06lu4oq40147jl77mgck' } ] :
+      query.error ? [ { text: 'Ошибка загрузки списка', value: 'cjbuv06lu4oq40147jl77mgck' } ] :
+      query.allModels.map(model => {
         return {
           text: model.name,
           value:  model.id
         }
       })
-    }
     return (
       <Modal
         trigger={<Icon name='plus' />}
+        open={open}
+        onOpen={this.open}
+        onClose={this.close}
       >
         <Modal.Header as='h2'> Добавление продукции </Modal.Header>
         <Modal.Content>
@@ -104,7 +116,7 @@ class CreateProdModal extends Component {
               <Form.Input label='Плавка' placeholder='Плавка'
                 type="number" min="1" max="999"
                 onChange={(e) => this.setState({ melt: parseInt(e.target.value, 10) })} value={this.state.melt}/>
-              <Form.Input label='Пл. смена (если промаркирована)' placeholder='Пл. смена'
+              <Form.Input label='Пл. смена (только если промаркирована)' placeholder='Пл. смена'
                 type="number" min="1" max="3"
                 onChange={(e) => this.setState({ meltShift: parseInt(e.target.value, 10) }) } value={this.state.meltShift}/>
               <Form.Input label='Номер' placeholder='Номер'
@@ -114,19 +126,17 @@ class CreateProdModal extends Component {
                 type="number" min="16" max="18"
                 onChange={(e) => this.setState({ year: parseInt(e.target.value, 10) })} value={this.state.year}/>
             </Form.Group>
-            <Form.Button>Добавить</Form.Button>
           </Form>
         </Modal.Content>
         <Modal.Actions>
-          <Button basic color='red' inverted>
-            <Icon name='remove' /> No
+          <Button onClick={this.close} color='red'>
+            <Icon name='remove' /> Отмена
           </Button>
-          <Button color='green' inverted>
-            <Icon name='checkmark' /> Yes
+          <Button onClick={() => this._confirm()}>
+            <Icon name='checkmark' /> Добавить
           </Button>
         </Modal.Actions>
       </Modal>
-
     )
   }
 
@@ -146,7 +156,7 @@ class CreateProdModal extends Component {
         year
       }
     })
-    this.props.history.push(`/`)
+    this.close()
   }
 }
 

@@ -15,7 +15,9 @@ class NavBar extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
-    const userId = localStorage.getItem(GC_USER_ID)
+
+    const userId = this.props.user
+
     return (
       // <Menu fixed='top' inverted className='addclass'>
       <div>
@@ -27,12 +29,8 @@ class NavBar extends Component {
               <Menu.Item icon name='home' as={ NavLink } exact to='/' color='grey'>
                 <Icon name='home' />
               </Menu.Item>
-              <Menu.Item icon name='createProd' as={ NavLink } exact to='/create_prod' color='grey'>
-                <Icon name='plus' />
-              </Menu.Item>
               <Menu.Item icon link name='create' color='grey'>
                 <CreateProdModal />
-
               </Menu.Item>
             </Menu.Menu>
           }
@@ -53,8 +51,6 @@ class NavBar extends Component {
           <Message warning>Войдите в систему, чтобы продолжить</Message>
         }
       </div>
-
-
     )
   }
 

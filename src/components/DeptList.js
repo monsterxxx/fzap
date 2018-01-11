@@ -39,7 +39,7 @@ class DeptList extends Component {
         >
           <Icon name='dropdown' size='large' />
           <Header size='large' as='span'>{dept.name}</Header>
-          <Button icon='plus' size='small' floated='right' />
+          {/* <Button icon='plus' size='small' floated='right' /> */}
         </Accordion.Title>
         <Accordion.Content active={_.includes(activeIndex, i)}>
           {dept.id}
