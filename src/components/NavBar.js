@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
-import { Menu, Icon, Message, Modal } from 'semantic-ui-react'
+import { Menu, Icon, Message} from 'semantic-ui-react'
 
 import CreateProdModal from './CreateProdModal'
 
@@ -24,7 +24,7 @@ class NavBar extends Component {
         <Menu size='large' inverted >
           {/* <Container text> */}
           <Menu.Item header>KOMZ</Menu.Item>
-          {this.props.user &&
+          {userId &&
             <Menu.Menu>
               <Menu.Item icon name='home' as={ NavLink } exact to='/' color='grey'>
                 <Icon name='home' />
@@ -35,7 +35,7 @@ class NavBar extends Component {
             </Menu.Menu>
           }
           <Menu.Menu position='right'>
-            {this.props.user ?
+            {userId ?
               <Menu.Item name='Выход' onClick={() => {
                 localStorage.removeItem(GC_USER_ID)
                 localStorage.removeItem(GC_AUTH_TOKEN)
@@ -47,7 +47,7 @@ class NavBar extends Component {
           </Menu.Menu>
           {/* </Container> */}
         </Menu>
-        {!this.props.user &&
+        {!userId &&
           <Message warning>Войдите в систему, чтобы продолжить</Message>
         }
       </div>

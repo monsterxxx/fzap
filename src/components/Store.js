@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import { Header } from 'semantic-ui-react'
-
 import NavBar from './NavBar'
 import DeptList from './DeptList'
 import DataLoadErrorMessage from './messages/DataLoadErrorMessage'
@@ -14,6 +12,22 @@ const allDeptsQuery = gql`
       id
       name
       type
+      _prodsMeta {
+       count
+      }
+      deptModels {
+        model {
+          id
+          name
+        }
+        _prodsMeta {
+         count
+        }
+        prods {
+          id
+          fullnumber
+        }
+      }
     }
   }
 `

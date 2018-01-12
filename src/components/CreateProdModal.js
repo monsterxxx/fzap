@@ -47,7 +47,7 @@ class CreateProdModal extends Component {
     modelId: 'cjbuv06lu4oq40147jl77mgck',
     modelId1: 'cjbuv06lu4oq40147jl77mgck',
     melt: 1,
-    meltShift: undefined,
+    meltShift: 0,
     number: 1,
     year: 17
   }
@@ -116,7 +116,7 @@ class CreateProdModal extends Component {
               <Form.Input label='Плавка' placeholder='Плавка'
                 type="number" min="1" max="999"
                 onChange={(e) => this.setState({ melt: parseInt(e.target.value, 10) })} value={this.state.melt}/>
-              <Form.Input label='Пл. смена (только если промаркирована)' placeholder='Пл. смена'
+              <Form.Input label='Плав. смена (0 - если не промаркирована)' placeholder='Пл. смена'
                 type="number" min="1" max="3"
                 onChange={(e) => this.setState({ meltShift: parseInt(e.target.value, 10) }) } value={this.state.meltShift}/>
               <Form.Input label='Номер' placeholder='Номер'
