@@ -6,13 +6,16 @@ class ProdItem extends Component {
     checked: false
   }
 
+  handleClick = (e, d) => {
+    const { checked } = this.state
+    const { id } = this.props
+    console.log(d)
+    this.setState({checked: !checked})
+    this.props.selectProd(id)
+  }
+
   render() {
     const {checked} = this.state
-
-    this.handleClick = (e, d) => {
-      console.log(d)
-      this.setState({checked: !checked})
-    }
 
     return (
       <List.Item onClick={this.handleClick} active={checked}>

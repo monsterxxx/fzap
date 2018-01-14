@@ -14,8 +14,8 @@ class ModelList extends Component {
             (deptModels.map((deptModel, index) => ({
               title: deptModel.model.name + ' ('+deptModel._prodsMeta.count+')',
               content: {
-                content: (<ProdList prods={deptModel.prods} />),
-                key: 'content-' + index
+                content: (<ProdList prods={deptModel.prods} selectProd={this.props.selectProd}/>),
+                key: deptModel.id
               }
             })))
           }

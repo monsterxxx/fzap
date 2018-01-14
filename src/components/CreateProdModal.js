@@ -107,7 +107,7 @@ class CreateProdModal extends Component {
         onOpen={this.open}
         onClose={this.close}
       >
-        <Modal.Header as='h2'> Добавление продукции </Modal.Header>
+        <Modal.Header as='h2'> Добавить продукцию </Modal.Header>
         <Modal.Content>
           <Form onSubmit={() => this._confirm()}>
             <Form.Select label='Участок' options={deptOptions} onChange={this.handleChange3} value={this.state.deptId}/>

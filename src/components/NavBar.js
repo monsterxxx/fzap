@@ -5,6 +5,7 @@ import { withRouter } from 'react-router'
 import { Menu, Icon, Message} from 'semantic-ui-react'
 
 import CreateProdModal from './CreateProdModal'
+import MoveModal from './MoveModal'
 
 import { GC_USER_ID, GC_AUTH_TOKEN } from '../constants'
 
@@ -31,6 +32,9 @@ class NavBar extends Component {
               </Menu.Item>
               <Menu.Item icon link name='create' color='grey'>
                 <CreateProdModal />
+              </Menu.Item>
+              <Menu.Item icon link name='move' color='grey'>
+                <MoveModal moveProds={this.props.moveProds} />
               </Menu.Item>
             </Menu.Menu>
           }

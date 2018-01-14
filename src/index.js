@@ -39,7 +39,7 @@ const client = new ApolloClient({
 ReactDOM.render(
   <HashRouter>
     <ApolloProvider client={client}>
-      <App client={client}/>
+      <App />
     </ApolloProvider>
   </HashRouter>
   , document.getElementById('root')

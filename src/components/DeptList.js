@@ -21,7 +21,14 @@ class DeptList extends Component {
     const { activeIndex } = this.state
 
     const depts = this.props.depts.map((dept, i) => (
-      <Segment key={dept.id}>
+      <Segment
+        key={dept.id}
+        color={
+          dept.type === 'TRANSPORT' ? 'green' :
+          dept.type === 'PARTNER' ? 'blue' :
+          dept.type === 'CLIENT' ? 'purple' :
+          'black'
+        }>
         <Accordion.Title
           active={_.includes(activeIndex, i)}
           index={i}
@@ -32,7 +39,7 @@ class DeptList extends Component {
           {/* <Button icon='plus' size='small' floated='right' /> */}
         </Accordion.Title>
         <Accordion.Content active={_.includes(activeIndex, i)}>
-          <ModelList deptModels={dept.deptModels}/>
+          <ModelList deptModels={dept.deptModels} selectProd={this.props.selectProd}/>
         </Accordion.Content>
       </Segment>
     ))

@@ -34,6 +34,12 @@ const SIGNIN_USER_MUTATION = gql`
   }
 `
 
+const TestMutation = gql`
+  mutation TestMutation ( $from: ID!, $to: ID!, $prodIds: [ID!]! ) {
+    moveResolver ( from: $from, to: $to, prodIds: $prodIds ) { success }
+  }
+`
+
 class Login extends Component {
 
   state = {
@@ -43,8 +49,23 @@ class Login extends Component {
     name: ''
   }
 
-  render() {
+  test = async () => {
+    const min = 1
+    const max = 10
+    if (true) {
+      const result = await this.props.TestMutation({
+        variables: {
+          from: 'cjbuuvddo4opm0147d178zmuy',
+          to: 'cjbuuv9ka4s3l0162qzn4zy5x',
+          prodIds: ['cjcbjkcd74y12011638wlf799', 'cjcbj1kn54ve10125za3terg0']
+        }
+      })
+      console.log(result)
+    }
+  }
 
+  render() {
+    this.test() //run and log TestMutation
     return (
       <Form>
         <Header as='h2'>{this.state.login ? 'Вход' : 'Регистрация'}
@@ -127,6 +148,7 @@ class Login extends Component {
 }
 
 export default withApollo(compose(
+  graphql(TestMutation, { name: 'TestMutation' }),
   graphql(CREATE_USER_MUTATION, { name: 'createUserMutation' }),
   graphql(SIGNIN_USER_MUTATION, { name: 'signinUserMutation' })
 )(Login))
