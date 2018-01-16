@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom'
 import 'semantic-ui-css/semantic.min.css'
 import './styles/index.css'
 import App from './components/App'
-// import registerServiceWorker from './registerServiceWorker'
-// import { BrowserRouter } from 'react-router-dom'
-import { HashRouter } from 'react-router-dom'
+// import registerServiceWorker from './registerServiceWorker' //prod
+// import { BrowserRouter } from 'react-router-dom' //prod
+import { HashRouter } from 'react-router-dom' //dev
 
 import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
@@ -45,4 +45,4 @@ ReactDOM.render(
   , document.getElementById('root')
 )
 
-// registerServiceWorker()
+// registerServiceWorker() //prod
